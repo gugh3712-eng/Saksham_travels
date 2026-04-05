@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saksham Travel Fleet</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <i class="fas fa-car"></i>
+                    <span>Saksham Travel Fleet</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#dashboard" class="nav-link active">Dashboard</a></li>
+                    <li><a href="#vehicles" class="nav-link">Vehicles</a></li>
+                    <li><a href="#drivers" class="nav-link">Drivers</a></li>
+                    <li><a href="#bookings" class="nav-link">Bookings</a></li>
+                    <li><a href="#reports" class="nav-link">Reports</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="container">
+                <h1 class="section-title">Dashboard</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>24</h3>
+                            <p>Total Vehicles</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>18</h3>
+                            <p>Active Drivers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Today's Bookings</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>₹1,45,000</h3>
+                            <p>Monthly Revenue</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <h3>Bookings This Week</h3>
+                        <canvas id="bookingsChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Vehicle Utilization</h3>
+                        <canvas id="utilizationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Vehicles Section -->
+        <section id="vehicles" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="section-title">Vehicle Management</h1>
+                    <button class="btn btn-primary" onclick="openModal('addVehicleModal')">
+                        <i class="fas fa-plus"></i> Add Vehicle
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="vehicles-table">
+                        <thead>
+                            <tr>
+                                <th>Vehicle No.</th>
+                                <th>Model</th>
+                                <th>Capacity</th>
+                                <th>Status</th>
+                                <th>Driver</th>
+                                <th>Next Service</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>DL 12 AB 1234</td>
+                                <td>Toyota Innova</td>
+                                <td>6+1</td>
+                                <td><span class="status active">Active</span></td>
+                                <td>Raj Kumar</td>
+                                <td>15 Jan 2024</td>
+                                <td>
+                                    <button class="btn-icon edit" onclick="editVehicle(1)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete" onclick="deleteVehicle(1)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>HR 55 XY 5678</td>
+                                <td>Swift Dzire</td>
+                                <td>4+1</td>
+                                <td><span class="status maintenance">Maintenance</span></td>
+                                <td>Sunil Sharma</td>
+                                <td>20 Jan 2024</td>
+                                <td>
+                                    <button class="btn-icon edit" onclick="editVehicle(2)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete" onclick="deleteVehicle(2)"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <!-- More rows... -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Drivers Section -->
+        <section id="drivers" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="section-title">Driver Management</h1>
+                    <button class="btn btn-primary" onclick="openModal('addDriverModal')">
+                        <i class="fas fa-plus"></i> Add Driver
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="drivers-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>License No.</th>
+                                <th>Phone</th>
+                                <th>Vehicle</th>
+                                <th>Status</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Raj Kumar</td>
+                                <td>DL123456789</td>
+                                <td>+91 98765 43210</td>
+                                <td>DL 12 AB 1234</td>
+                                <td><span class="status active">Active</span></td>
+                                <td>4.8</td>
+                                <td>
+                                    <button class="btn-icon edit"><i class="fas fa-edit"></i></button>
+                                    <button class="btn-icon delete"><i class="fas fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            <!-- More rows... -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bookings Section -->
+        <section id="bookings" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="section-title">Bookings</h1>
+                    <button class="btn btn-primary">New Booking</button>
+                </div>
+                <!-- Booking cards/content -->
+            </div>
+        </section>
+
+        <!-- Reports Section -->
+        <section id="reports" class="section">
+            <div class="container">
+                <h1 class="section-title">Reports</h1>
+                <!-- Reports content -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div id="addVehicleModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Vehicle</h2>
+                <span class="close" onclick="closeModal('addVehicleModal')">&times;</span>
+            </div>
+            <form class="modal-form">
+                <div class="form-group">
+                    <label>Vehicle Number</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Model</label>
+                    <input type="text" required>
+                </div>
+                <!-- More form fields -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addVehicleModal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Add Vehicle</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Saksham Travel Fleet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
